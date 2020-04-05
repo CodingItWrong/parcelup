@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+
+mkdir $1
+cd $1
+
+git init .
+npx gitignore node
+echo "dist" >> .gitignore
+git add .
+git commit -m "Add gitignore"
+
+cp "${DIR}/template/package.json" .
+git add .
+git commit -m "Add package.json file"
+
+yarn add -D babel-eslint \
+            eslint \
+            eslint-config-prettier \
+            eslint-plugin-prettier \
+            prettier
+cp "${DIR}/template/.eslintrc.js" .eslintrc.js
+cp "${DIR}/template/.prettierrc.js" .prettierrc.js
+git add .
+git commit -m "Add ESLint and Prettier"
+
+yarn add -D parcel-bundler
+git add .
+git commit -m "Add Parcel"
+
+cp "${DIR}/template/index.html" .
+cp -r "${DIR}/template/src" .
+git add .
+git commit -m "Add starter HTML and JS"
