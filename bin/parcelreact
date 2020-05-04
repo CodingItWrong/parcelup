@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+
+${DIR}/bin/parcelup $1
+cd $1
+
+yarn add react \
+         react-dom
+rm -fr src
+cp -r "${DIR}/template/react/src" src
+git add .
+git commit -m "Add React"
